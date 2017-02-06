@@ -3,14 +3,9 @@ cache: bundler
 language: ruby
 rvm:
   - 2.3.0
-  - ruby-head
-matrix:
-  fast_finish: true
-  allow_failures:
-    - rvm: ruby-head
 before_install: 'gem install bundler -v 1.11.2'
 install: 'bundle install --without development'
 script:
   - bundle exec rspec
-  - bundle exec rubocop
-  - bundle exec todo_lint
+after_success:
+  - bundle exec codeclimate-test-reporter
